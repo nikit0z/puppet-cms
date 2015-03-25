@@ -1,0 +1,6 @@
+---
+verbose: true
+mongo_nodes:
+  - primary-mongo.blabla.com
+  - secondary-mongo.blabla.com
+  - secondary2-mongo.blabla.com

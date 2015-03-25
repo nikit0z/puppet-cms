@@ -1,0 +1,8 @@
+---
+:backends:
+  - yaml
+:yaml:
+  :datadir: /data/puppet.cms/hieradata/
+:hierarchy:
+  - "nodes/%{::clientcert}"
+  - "env/%{::environment}"
