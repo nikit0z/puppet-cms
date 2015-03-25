@@ -25,6 +25,7 @@ class profile::mongo {
   class {'::mongodb::server':
     verbose => hiera('verbose'),
     replset => 'rscms',
+    bind_ip => ['0.0.0.0']
   }->
 
   class {'::mongodb::client':}
