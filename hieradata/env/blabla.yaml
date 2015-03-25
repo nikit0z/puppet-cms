@@ -1,6 +1,6 @@
 ---
 verbose: true
 mongo_nodes:
-  - primary-mongo.blabla.com
-  - secondary-mongo.blabla.com
-  - secondary2-mongo.blabla.com
+  - primary-mongo.blabla.com:27017
+  - secondary-mongo.blabla.com:27017
+  - secondary2-mongo.blabla.com:27017
