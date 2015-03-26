@@ -1,19 +1,27 @@
-class profile::tomcat (
-) {
-}
+class profile::tomcat {
+  class { '::tomcat':
+    install_from_source => false,
+  }
 
-class profile::cms (
-) {
-}
-
-class profile::mongo::primary (
-) {
+  tomcat::instance{ 'default':
+    package_name => 'tomcat',
+  }->
   
+  tomcat::service { 'default':
+    use_jsvc     => false,
+    use_init     => true,
+    service_name => 'tomcat',
+  }
+}
+
+class profile::cms {
+}
+
+class profile::mongo::primary {
   mongodb_replset { rscms:
     ensure  => present,
     members => hiera('mongo_nodes')
   }
-
 }
 
 class profile::mongo {
@@ -42,6 +50,11 @@ node default {
     "mongo-primary" : {
       include profile::mongo
       include profile::mongo::primary
+    }
+    
+    "frontend" : {
+      include profile::tomcat  
+      include profile::cms
     }
   } 
 }
