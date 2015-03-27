@@ -3,7 +3,7 @@ class profile::tomcat {
     install_from_source => false,
   }
 
-  tomcat::instance{ 'default':
+  tomcat::instance { 'default':
     package_name => 'tomcat',
   }->
   
@@ -15,6 +15,26 @@ class profile::tomcat {
 }
 
 class profile::cms {
+  $catalina_base = '/usr/share/tomcat'
+  $mongo_nodes   = join(hiera('mongo_nodes'),",")
+
+  file { "$catalina_base/cms.war":
+    notify  => Service['tomcat'],
+    require => Package['tomcat'],
+    mode    => 660,
+    owner   => 'root',
+    group   => 'tomcat',
+    source  => 'puppet:///modules/cms/cms.war',
+  }
+
+  file { "$catalina_base/cms.config":
+    notify  => Service['tomcat'],
+    require => Package['tomcat'],
+    mode    => 660,
+    owner   => 'root',
+    group   => 'tomcat',
+    content => template('cms/cms.config.erb'),
+  }
 }
 
 class profile::mongo::primary {
