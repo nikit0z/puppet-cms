@@ -18,7 +18,7 @@ class profile::cms {
   $catalina_base = '/usr/share/tomcat'
   $mongo_nodes   = join(hiera('mongo_nodes'),",")
 
-  file { "$catalina_base/cms.war":
+  file { "$catalina_base/webapps/cms.war":
     notify  => Service['tomcat'],
     require => Package['tomcat'],
     mode    => 660,
