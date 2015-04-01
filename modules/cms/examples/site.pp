@@ -45,6 +45,7 @@ class profile::mongo::primary {
 }
 
 class profile::mongo {
+  $dbpath = hiera('dbpath', '/var/lib/mongodb')
   # remove this on prod
   class {'::mongodb::globals':
     manage_package_repo => true,
@@ -53,7 +54,8 @@ class profile::mongo {
   class {'::mongodb::server':
     verbose => hiera('verbose'),
     replset => 'rscms',
-    bind_ip => ['0.0.0.0']
+    bind_ip => ['0.0.0.0'],
+    dbpath  => $dbpath
   }->
 
   class {'::mongodb::client':}

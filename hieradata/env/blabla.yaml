@@ -1,5 +1,6 @@
 ---
 verbose: true
+dbpath: /data/mongodb
 mongo_nodes:
   - primary-mongo.blabla.com:27017
   - secondary-mongo.blabla.com:27017
